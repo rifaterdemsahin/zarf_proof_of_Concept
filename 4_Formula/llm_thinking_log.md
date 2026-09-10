@@ -877,3 +877,26 @@ This log documents the thinking phase summaries and reasoning processes of the L
 - SPEC-014 added for the private Zarf package; ADR-002 added for the no-`.devcontainer/` decision.
 - Searched popular GitHub skill repos: `clouddrove/claude-skills` (404, no longer exists/renamed), `LukasNiessen/kubernetes-skill` (MIT, active, matches — pulled into `.claude/skills/kubernetes-skill/`). No public Zarf-specific skill exists yet, so authored `.kilo/skills/zarf.md` in-house, registered in `.kilo/kilo.json`.
 - Next: run `nav_sync.py` + `smoke_test.py`.
+
+---
+
+## 📅 2026-09-10 — Actually turn Zarf on: init, build, deploy, verify, diagram
+
+### 📥 Input / Task
+- User: "turn the zarf on and fill all the delivery pilot related data into the folders", then "run my helloworld based on zarf and show it and show the architecture with svg."
+
+### 💭 Thinking & Reasoning Process
+1. This machine is a local macOS dev box, not the Codespace the OKRs describe — but it already had Docker, minikube, and kubectl installed, and RULE-003/objective intent is "a working Zarf+minikube environment," not literally Codespaces-only. Proceeded locally; the exact same commands apply in Codespaces per `2_Environment/codespaces_zarf_setup.md`.
+2. `zarf` wasn't on Homebrew core; found and used the `defenseunicorns/tap/zarf` tap.
+3. `zarf init --confirm` alone failed ("requires a zarf-init package... re-run without --confirm") because non-interactive `--confirm` can't answer the download-consent prompt. Fixed by `zarf package pull` first, then `zarf init <local-path> --confirm` with the package as a positional arg (not a flag — `-f` isn't valid).
+4. The pulled init tarball landed in the repo root by default — a RULE-005 violation risk. Moved it to `~/.zarf-cache/` (outside the repo) immediately, and pointed `zarf package create --output` at the same cache dir for the built hello-world package, so no build artifacts ever touch the repo.
+5. `zarf package create` + `zarf package deploy` both succeeded on the first real attempt — SPEC-014 as designed matched reality with no manifest changes needed.
+6. Verifying in-browser surfaced two real bugs, not just cosmetic ones: (a) the emoji rendered as mojibake because the inline HTML in the ConfigMap had no `<meta charset="utf-8">` — browsers without an explicit charset can guess wrong; (b) `http://localhost:18080` hit Chrome's stale-cookie state from an unrelated local project sharing the `localhost` hostname (`400 Request Header Or Cookie Too Large`), unrelated to the deploy itself — worked around by using `127.0.0.1` instead, which has its own cookie jar.
+7. Fixed the charset bug in the actual source (`manifests/hello-world.yaml`), rebuilt, redeployed via Helm upgrade — but the existing `kubectl port-forward` kept proxying to the old (now-replaced) pod IP, so it had to be restarted after the redeploy to pick up the new pod.
+8. Drew `3_Simulation/zarf_architecture.svg` in the same dark/gradient style as the existing `agentic_workflow.svg`, showing the real components actually observed running (`zarf-injector`, `zarf-docker-registry`, `agent-hook` x2 in `zarf` ns; ConfigMap/Deployment/Service in `hello-world` ns) rather than a generic Zarf diagram — registered it in `3_Simulation/carousel_config.json` (SPEC-003).
+
+### 📤 Outcomes & Decisions
+- Zarf CLI v0.85.0 installed; cluster initialized; hello-world package built, deployed, and visually verified reachable (screenshot taken).
+- Two real bugs found and fixed in the package source: missing charset meta tag, and outdated port-forward after a redeploy (operational note, not a source bug).
+- OKRs 1 & 2 marked achieved in `1_Real_Unknown/okrs.md`; `tasks.md` Phases 2–4 marked complete; SPEC-014 updated with "Verified as delivered."
+- Error/fix pair logged in `6_Semblance/error.log` + `fix.log`; retrospective added to `lessons_learned.md`.

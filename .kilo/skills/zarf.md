@@ -32,5 +32,8 @@ Guide building, deploying, and troubleshooting Zarf packages against the Codespa
 | Symptom | Likely Cause | Fix |
 |---------|-------------|-----|
 | `zarf init` hangs | minikube under-resourced | Restart with more CPU/memory (see R-001) |
+| `zarf init --confirm` errors "requires a zarf-init package... re-run without --confirm" | Non-interactive `--confirm` can't answer the download-consent prompt | `zarf package pull oci://ghcr.io/zarf-dev/packages/init:<version>` first, then `zarf init <local-tarball-path> --confirm` (positional arg, not a flag) |
 | `zarf package deploy` fails pulling image | Image not listed under `components[].images` | Add the image reference to `zarf.yaml` |
 | Pod stuck `ImagePullBackOff` after deploy | Zarf registry not reachable from the pod | `zarf tools kubectl get pods -n zarf`; re-run `zarf init` |
+| Redeployed pod's changes don't show up in the browser | An existing `kubectl port-forward` is still proxying to the old (replaced) pod | Kill and restart the port-forward after every redeploy |
+| Pulled/built `.tar.zst` package lands in the repo root | Zarf CLI defaults to writing to the current directory | `zarf package create . --output ~/.zarf-cache/` (or any path outside the repo) — never commit build artifacts (RULE-005) |

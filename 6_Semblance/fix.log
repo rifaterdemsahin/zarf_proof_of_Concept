@@ -42,3 +42,5 @@ Lesson captured in lessons_learned.md
 | Error Date | Stage | Error Summary | Fix Status |
 |------------|-------|---------------|------------|
 | 2026-09-10 | SETUP | Initialization | APPLIED |
+[2026-09-10] [5_Symbols] [VERIFIED] — Added `<meta charset="utf-8">` to `manifests/hello-world.yaml`'s ConfigMap HTML; rebuilt (`zarf package create`), redeployed (`zarf package deploy`, Helm upgrade), restarted `kubectl port-forward` to bind the new pod, re-verified emoji renders correctly via Chrome screenshot.
+[2026-09-10] [7_Testing_Known] [WORKAROUND] — `localhost:18080` cookie-size error worked around by using `127.0.0.1:18080` instead (separate cookie jar in Chrome); no change needed to the deployed site itself.

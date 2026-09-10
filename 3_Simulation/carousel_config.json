@@ -1,6 +1,10 @@
 {
   "images": [
     {
+      "url": "3_Simulation/zarf_architecture.svg",
+      "caption": "Zarf on minikube — Package Flow"
+    },
+    {
       "url": "3_Simulation/mockup_index.png",
       "caption": "Homepage Mockup"
     },

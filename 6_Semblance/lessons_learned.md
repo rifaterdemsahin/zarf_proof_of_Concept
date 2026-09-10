@@ -97,3 +97,20 @@
 
 ### Takeaway for Future AI Agents
 - Load `5_Symbols/rules/agent_operating_rules.md` at session start. After work: write the spec in `4_Formula/specs.md`, then commit and push.
+
+## 📅 2026-09-10: Zarf turned on — cluster init, private package deploy, verified live
+
+### What went well
+- The SPEC-014 package (`5_Symbols/zarf-hello-world/`) built and deployed successfully on the first real `zarf package create` / `zarf package deploy` attempt — the manifest design matched reality with zero changes.
+- Keeping build artifacts (`zarf-init-*.tar.zst`, `zarf-package-*.tar.zst`) out of the repo (`~/.zarf-cache/`, `--output` flag) meant RULE-005's Root Layout smoke check never had to fight the Zarf CLI's default download-to-cwd behavior.
+- Visual verification (not just `curl`) caught a real bug `curl` alone missed: no `<meta charset="utf-8">` meant the emoji rendered as mojibake in an actual browser. Screenshot-based verification is worth the extra step for anything user-facing.
+
+### Gaps & Challenges
+- `zarf init --confirm` fails non-interactively unless the init package is already local — needed `zarf package pull` first, then `zarf init <local-path> --confirm`. This should be called out explicitly in `2_Environment/codespaces_zarf_setup.md` and the `.kilo/skills/zarf.md` troubleshooting table for anyone scripting this non-interactively (e.g. CI).
+- After a Helm-upgrade redeploy, an already-running `kubectl port-forward` kept serving the old pod — it silently didn't error, it just never reflected the fix until restarted. Any Zarf redeploy loop needs an explicit "restart your port-forward" reminder.
+- A Chrome-side `400 Request Header Or Cookie Too Large` on `localhost:18080` came from an unrelated local project's stale cookies on the shared `localhost` hostname, not from anything Zarf/K8s did — `127.0.0.1` sidesteps it. Worth remembering before assuming a deploy is broken.
+
+### Takeaway for Future AI Agents
+- When "turning on" any local cluster tooling non-interactively, pull/build artifacts explicitly and point them outside the repo before running the install step — don't rely on `--confirm` alone to skip download prompts.
+- Verify user-facing output visually (screenshot), not just with `curl`/`kubectl get` — encoding and rendering bugs don't show up in headers or pod status.
+- After any redeploy, restart proxies/port-forwards rather than assuming they'll pick up the new pod.

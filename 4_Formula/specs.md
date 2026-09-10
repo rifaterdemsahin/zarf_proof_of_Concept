@@ -183,7 +183,9 @@
   - `manifests/hello-world.yaml` creates a dedicated `hello-world` Namespace, a ConfigMap holding the static `index.html`, a single-replica Deployment mounting that ConfigMap, and a ClusterIP Service on port 80
   - Built with `zarf package create .`, deployed with `zarf package deploy`, viewed via `kubectl port-forward svc/hello-world -n hello-world 8080:80`
   - No `.devcontainer/` is shipped (ADR-002 in `4_Formula/decisions.md`) — the Codespaces + minikube + Zarf setup is a manual, documented guide in `2_Environment/codespaces_zarf_setup.md` to keep the repo root RULE-005 compliant
-- **Related Files:** `5_Symbols/zarf-hello-world/zarf.yaml`, `5_Symbols/zarf-hello-world/manifests/hello-world.yaml`, `2_Environment/codespaces_zarf_setup.md`, `4_Formula/decisions.md`
+  - HTML fragment declares `<meta charset="utf-8">` so the emoji renders correctly (regression found and fixed 2026-09-10 — initial deploy showed mojibake)
+- **Verified as delivered (2026-09-10):** `zarf init` completed against `oci://ghcr.io/zarf-dev/packages/init:v0.85.0` on a local minikube cluster (Docker driver); `zarf package create` + `zarf package deploy` succeeded; `hello-world` Deployment/Service came up in the `hello-world` namespace; site confirmed reachable via `kubectl port-forward` + browser screenshot. Build artifacts (`zarf-init-*.tar.zst`, `zarf-package-hello-world-*.tar.zst`) are kept in `~/.zarf-cache/` outside the repo, never committed (RULE-005 root cleanliness + they're build output, not source).
+- **Related Files:** `5_Symbols/zarf-hello-world/zarf.yaml`, `5_Symbols/zarf-hello-world/manifests/hello-world.yaml`, `2_Environment/codespaces_zarf_setup.md`, `4_Formula/decisions.md`, `3_Simulation/zarf_architecture.svg`
 - **Last Updated:** 2026-09-10
 
 ---

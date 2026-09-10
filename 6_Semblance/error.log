@@ -12,6 +12,8 @@ Severity levels: `CRITICAL` | `ERROR` | `WARNING` | `INFO`
 <!-- Add new entries below this line, newest first -->
 
 [2026-09-10] [SETUP] [INFO] — error.log initialized for zarf_proof_of_Concept (bootstrapped from delivery-pilot-template).
+[2026-09-10] [5_Symbols] [WARNING] — hello-world ConfigMap HTML had no `<meta charset="utf-8">`; the 👋 emoji rendered as mojibake in-browser after first deploy.
+[2026-09-10] [7_Testing_Known] [INFO] — `http://localhost:18080` returned `400 Request Header Or Cookie Too Large` in Chrome due to an unrelated local project's stale cookies on the shared `localhost` hostname; not a deploy defect.
 
 ---
 

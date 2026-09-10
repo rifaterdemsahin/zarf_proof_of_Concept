@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" style="background:#0b0f19;font-family:Inter,sans-serif">
+  <defs>
+    <linearGradient id="gz" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5ee6b0"/>
+      <stop offset="100%" stop-color="#7aa2ff"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#8b95ac"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="30" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Zarf on minikube — Package Flow</text>
+  <text x="450" y="48" text-anchor="middle" fill="#8b95ac" font-size="11">zarf_proof_of_Concept — 5_Symbols/zarf-hello-world</text>
+
+  <!-- Dev machine / Codespace -->
+  <rect x="30" y="80" width="220" height="500" rx="10" fill="none" stroke="#232b3d" stroke-width="1.5"/>
+  <text x="140" y="102" text-anchor="middle" fill="#7aa2ff" font-size="11" font-weight="700">Dev Machine / Codespace</text>
+
+  <rect x="55" y="120" width="170" height="50" rx="8" fill="#131826" stroke="#7aa2ff"/>
+  <text x="140" y="141" text-anchor="middle" fill="#e7ecf5" font-size="10" font-weight="600">Zarf CLI</text>
+  <text x="140" y="156" text-anchor="middle" fill="#8b95ac" font-size="8">zarf init / package create / deploy</text>
+
+  <rect x="55" y="190" width="170" height="60" rx="8" fill="#131826" stroke="#5ee6b0"/>
+  <text x="140" y="211" text-anchor="middle" fill="#e7ecf5" font-size="10" font-weight="600">zarf-hello-world/</text>
+  <text x="140" y="226" text-anchor="middle" fill="#8b95ac" font-size="8">zarf.yaml</text>
+  <text x="140" y="240" text-anchor="middle" fill="#8b95ac" font-size="8">manifests/hello-world.yaml</text>
+
+  <rect x="55" y="270" width="170" height="60" rx="8" fill="#131826" stroke="#232b3d"/>
+  <text x="140" y="291" text-anchor="middle" fill="#e7ecf5" font-size="10" font-weight="600">Public Zarf Init Package</text>
+  <text x="140" y="306" text-anchor="middle" fill="#8b95ac" font-size="8">oci://ghcr.io/zarf-dev/</text>
+  <text x="140" y="318" text-anchor="middle" fill="#8b95ac" font-size="8">packages/init</text>
+
+  <rect x="55" y="350" width="170" height="50" rx="8" fill="#131826" stroke="#232b3d"/>
+  <text x="140" y="371" text-anchor="middle" fill="#e7ecf5" font-size="10" font-weight="600">docker.io/library/nginx</text>
+  <text x="140" y="386" text-anchor="middle" fill="#8b95ac" font-size="8">1.27-alpine (public image)</text>
+
+  <rect x="55" y="420" width="170" height="60" rx="8" fill="#131826" stroke="#232b3d"/>
+  <text x="140" y="441" text-anchor="middle" fill="#e7ecf5" font-size="10" font-weight="600">Docker Engine</text>
+  <text x="140" y="456" text-anchor="middle" fill="#8b95ac" font-size="8">minikube --driver=docker</text>
+  <text x="140" y="470" text-anchor="middle" fill="#8b95ac" font-size="8">runs the cluster's node container</text>
+
+  <line x1="140" y1="170" x2="140" y2="190" stroke="#8b95ac" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="140" y1="250" x2="140" y2="270" stroke="#8b95ac" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- minikube cluster -->
+  <rect x="280" y="80" width="590" height="500" rx="10" fill="none" stroke="#232b3d" stroke-width="1.5"/>
+  <text x="575" y="102" text-anchor="middle" fill="#5ee6b0" font-size="11" font-weight="700">minikube Cluster (1 node)</text>
+
+  <!-- zarf namespace -->
+  <rect x="305" y="120" width="270" height="220" rx="10" fill="#0f1420" stroke="#7aa2ff" stroke-dasharray="4 3"/>
+  <text x="440" y="140" text-anchor="middle" fill="#7aa2ff" font-size="10" font-weight="700">namespace: zarf</text>
+  <text x="440" y="153" text-anchor="middle" fill="#8b95ac" font-size="7">created by `zarf init`</text>
+
+  <rect x="325" y="165" width="230" height="42" rx="6" fill="#131826" stroke="#232b3d"/>
+  <text x="440" y="184" text-anchor="middle" fill="#e7ecf5" font-size="9" font-weight="600">zarf-injector</text>
+  <text x="440" y="198" text-anchor="middle" fill="#8b95ac" font-size="7">bootstraps the seed registry pod</text>
+
+  <rect x="325" y="217" width="230" height="42" rx="6" fill="#131826" stroke="#232b3d"/>
+  <text x="440" y="236" text-anchor="middle" fill="#e7ecf5" font-size="9" font-weight="600">zarf-docker-registry</text>
+  <text x="440" y="250" text-anchor="middle" fill="#8b95ac" font-size="7">in-cluster OCI registry for images</text>
+
+  <rect x="325" y="269" width="230" height="42" rx="6" fill="#131826" stroke="#232b3d"/>
+  <text x="440" y="288" text-anchor="middle" fill="#e7ecf5" font-size="9" font-weight="600">agent-hook (x2)</text>
+  <text x="440" y="302" text-anchor="middle" fill="#8b95ac" font-size="7">mutating webhook — rewrites image refs</text>
+
+  <!-- hello-world namespace -->
+  <rect x="305" y="360" width="270" height="200" rx="10" fill="#0f1420" stroke="#5ee6b0" stroke-dasharray="4 3"/>
+  <text x="440" y="380" text-anchor="middle" fill="#5ee6b0" font-size="10" font-weight="700">namespace: hello-world</text>
+  <text x="440" y="393" text-anchor="middle" fill="#8b95ac" font-size="7">created by the hello-world package</text>
+
+  <rect x="325" y="405" width="230" height="42" rx="6" fill="#131826" stroke="#232b3d"/>
+  <text x="440" y="424" text-anchor="middle" fill="#e7ecf5" font-size="9" font-weight="600">ConfigMap: hello-world-html</text>
+  <text x="440" y="438" text-anchor="middle" fill="#8b95ac" font-size="7">static index.html</text>
+
+  <rect x="325" y="457" width="230" height="42" rx="6" fill="#131826" stroke="#232b3d"/>
+  <text x="440" y="476" text-anchor="middle" fill="#e7ecf5" font-size="9" font-weight="600">Deployment: hello-world</text>
+  <text x="440" y="490" text-anchor="middle" fill="#8b95ac" font-size="7">nginx:1.27-alpine, 1 replica</text>
+
+  <rect x="325" y="509" width="230" height="42" rx="6" fill="#131826" stroke="#232b3d"/>
+  <text x="440" y="528" text-anchor="middle" fill="#e7ecf5" font-size="9" font-weight="600">Service: hello-world</text>
+  <text x="440" y="542" text-anchor="middle" fill="#8b95ac" font-size="7">ClusterIP :80</text>
+
+  <!-- Browser -->
+  <rect x="620" y="405" width="220" height="146" rx="10" fill="#131826" stroke="#7aa2ff"/>
+  <text x="730" y="428" text-anchor="middle" fill="#e7ecf5" font-size="10" font-weight="700">kubectl port-forward</text>
+  <text x="730" y="442" text-anchor="middle" fill="#8b95ac" font-size="8">svc/hello-world -n hello-world</text>
+  <text x="730" y="456" text-anchor="middle" fill="#8b95ac" font-size="8">local:18080 -&gt; pod:80</text>
+  <rect x="650" y="470" width="160" height="60" rx="6" fill="#0b0e14" stroke="#5ee6b0"/>
+  <text x="730" y="495" text-anchor="middle" fill="#5ee6b0" font-size="16">👋</text>
+  <text x="730" y="516" text-anchor="middle" fill="#e7ecf5" font-size="8">Browser: 127.0.0.1:18080</text>
+
+  <!-- flow arrows -->
+  <line x1="250" y1="135" x2="325" y2="185" stroke="#7aa2ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="270" y="160" fill="#7aa2ff" font-size="7">1. zarf init</text>
+
+  <line x1="250" y1="220" x2="440" y2="405" stroke="#5ee6b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="260" y="330" fill="#5ee6b0" font-size="7">2. zarf package create</text>
+  <text x="260" y="342" fill="#5ee6b0" font-size="7">+ deploy (via zarf-docker-registry)</text>
+
+  <line x1="440" y1="459" x2="440" y2="509" stroke="#8b95ac" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="555" y1="530" x2="650" y2="500" stroke="#7aa2ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="565" y="500" fill="#7aa2ff" font-size="7">3. view</text>
+
+  <text x="450" y="605" text-anchor="middle" fill="#8b95ac" font-size="8">SPEC-014 · 4_Formula/specs.md · built &amp; verified 2026-09-10</text>
+</svg>

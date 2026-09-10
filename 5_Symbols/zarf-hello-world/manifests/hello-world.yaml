@@ -12,10 +12,13 @@ data:
   index.html: |
     <!doctype html>
     <html>
-      <head><title>Zarf Hello World</title></head>
+      <head>
+        <meta charset="utf-8" />
+        <title>Zarf Hello World</title>
+      </head>
       <body style="font-family: sans-serif; text-align: center; margin-top: 10%;">
-        <h1>👋 Hello from a private Zarf package</h1>
-        <p>Deployed via <code>zarf package deploy</code> on minikube in GitHub Codespaces.</p>
+        <h1>&#128075; Hello from a private Zarf package</h1>
+        <p>Deployed via <code>zarf package deploy</code> on Kubernetes (minikube) &mdash; built and pushed through Zarf's in-cluster registry.</p>
       </body>
     </html>
 ---
