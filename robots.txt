@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rifaterdemsahin.github.io/zarf_proof_of_Concept/sitemap.xml
