@@ -875,4 +875,5 @@ This log documents the thinking phase summaries and reasoning processes of the L
 - Template scaffold copied; placeholders replaced; commit `1d8b457`.
 - Stage-1 + Semblance logs reset to project content; commit `d1e54ff`.
 - SPEC-014 added for the private Zarf package; ADR-002 added for the no-`.devcontainer/` decision.
-- Next: pull external skills into `.claude/skills`/`.kilo/skills`, then run `nav_sync.py` + `smoke_test.py`.
+- Searched popular GitHub skill repos: `clouddrove/claude-skills` (404, no longer exists/renamed), `LukasNiessen/kubernetes-skill` (MIT, active, matches — pulled into `.claude/skills/kubernetes-skill/`). No public Zarf-specific skill exists yet, so authored `.kilo/skills/zarf.md` in-house, registered in `.kilo/kilo.json`.
+- Next: run `nav_sync.py` + `smoke_test.py`.
