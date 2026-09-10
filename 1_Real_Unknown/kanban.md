@@ -17,35 +17,22 @@
 ## 📥 Backlog
 *Tasks that are defined but not yet scheduled.*
 
-- [ ] **TSK-009: Production Environment Setup**
-  - **Assignee:** Human / DevOps
-  - **Details:** Setup production VMs/Containers on Fly.io and configure production TLS.
-  - **Stage Reference:** N/A
+- [ ] **TSK-017: Air-gapped transfer demo**
+  - **Assignee:** Human / Environment Agent
+  - **Details:** Demonstrate moving the built `.tar.zst` package to a disconnected environment and deploying it there, to actually exercise Zarf's air-gap story (this PoC only proved connected build/deploy).
+  - **Stage Reference:** [1_Real_Unknown/problem_statement.md](problem_statement.md) (explicitly out of scope for the first pass)
 
-- [ ] **TSK-010: Advanced Multimodal Simulation Test**
-  - **Assignee:** Gemini
-  - **Details:** Validate UI layouts dynamically using Gemini multimodal vision checks.
-  - **Stage Reference:** [Simulation Stage](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/3_Simulation/)
+- [ ] **TSK-018: Publish the package to a registry**
+  - **Assignee:** Human
+  - **Details:** Push `zarf-package-hello-world-*.tar.zst` to an OCI registry (e.g. `zarf package publish`) instead of only building locally.
+  - **Stage Reference:** [5_Symbols/zarf-hello-world/README.md](../5_Symbols/zarf-hello-world/README.md)
 
 ---
 
 ## 📋 Planned / To Do
 *Tasks scheduled for implementation.*
 
-- [ ] **TSK-005: Setup CI/CD Pipeline**
-  - **Assignee:** Copilot / DevOps
-  - **Details:** Set up GitHub Actions workflow to deploy static content to GitHub Pages.
-  - **Stage Reference:** [2_Environment/setup_ai.md](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/2_Environment/setup_ai.md)
-
-- [ ] **TSK-006: Integrate Azure Key Vault**
-  - **Assignee:** Claude / Security
-  - **Details:** Connect runtime environments to Azure Key Vault for secure secrets storage.
-  - **Stage Reference:** [2_Environment/setup_azure.md](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/2_Environment/setup_azure.md)
-
-- [ ] **TSK-007: Implement Active Reflection Routine**
-  - **Assignee:** All Agents
-  - **Details:** Establish `6_Semblance/lessons_learned.md` for post-milestone retrospectives.
-  - **Stage Reference:** [6_Semblance Stage](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/6_Semblance/)
+*Nothing currently planned beyond the backlog above — Objectives 1 & 2 are both achieved (see `okrs.md`).*
 
 ---
 
@@ -59,51 +46,39 @@
 ## 👀 In Review
 *Tasks completed and awaiting validation/review.*
 
-- [ ] **TSK-008: Basic Stage Folders Structure Validation**
-  - **Assignee:** Claude / Gemini
-  - **Details:** Ensure folder mapping (1-7) exists and is populated with correct template files.
-  - **Stage Reference:** [7_Testing_Known/README.md](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/7_Testing_Known/README.md)
+*Nothing pending review.*
 
 ---
 
 ## ✅ Done
 *Verified and completed tasks.*
 
-- [x] **TSK-001: Git Repository Initialization**
-  - **Assignee:** Human
-  - **Details:** Initialized repository and basic project structure.
-  - **Stage Reference:** [README.md](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/README.md)
+- [x] **TSK-001: Bootstrap from delivery-pilot-template**
+  - **Assignee:** Claude
+  - **Details:** Copied the 7-stage scaffold, replaced placeholders, defined project-specific problem statement/OKRs/tasks/risks.
+  - **Stage Reference:** [1_Real_Unknown/problem_statement.md](problem_statement.md)
 
-- [x] **TSK-002: Project Home Page Layout**
-  - **Assignee:** Gemini
-  - **Details:** Created `index.html` and `navigation_config.json` for site entry point.
-  - **Stage Reference:** [index.html](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/index.html)
+- [x] **TSK-004–007: Zarf CLI + minikube + zarf init**
+  - **Assignee:** Environment Agent (Claude)
+  - **Details:** Installed Zarf CLI (`defenseunicorns/tap/zarf`), verified minikube cluster Ready, ran `zarf init` against the public init package. `zarf` namespace pods (`zarf-injector`, `zarf-docker-registry`, `agent-hook` x2) all Running.
+  - **Stage Reference:** [2_Environment/codespaces_zarf_setup.md](../2_Environment/codespaces_zarf_setup.md)
 
-- [x] **TSK-003: Define Kanban Template**
-  - **Assignee:** Gemini
-  - **Details:** Created `1_Real_Unknown/kanban.md` and define the initial setup tasks.
-  - **Stage Reference:** [1_Real_Unknown/kanban.md](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/1_Real_Unknown/kanban.md)
+- [x] **TSK-008–012: Private hello-world Zarf package**
+  - **Assignee:** Symbols Agent (Claude)
+  - **Details:** Authored `zarf.yaml` + K8s manifests, built with `zarf package create`, deployed with `zarf package deploy`. Found and fixed a missing `<meta charset="utf-8">` bug during visual verification, redeployed.
+  - **Stage Reference:** [5_Symbols/zarf-hello-world/](../5_Symbols/zarf-hello-world/), [4_Formula/specs.md](../4_Formula/specs.md) SPEC-014
 
-- [x] **TSK-004: Configure Navigation & Menus**
-  - **Assignee:** Gemini / Claude
-  - **Details:** Add dynamic JSON configuration loading for navigation menus and ensure persistency via cookies.
-  - **Stage Reference:** [2_Environment/navigation.md](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/2_Environment/navigation.md)
-
-- [x] **TSK-011: Supabase Database Integration & Setup**
-  - **Assignee:** Gemini
-  - **Details:** Initialize local Supabase CLI config, document database integration, and Azure Key Vault secret mappings.
-  - **Stage Reference:** [4_Formula/database.md](file:///Users/rifaterdemsahin/projects/delivery-pilot-template/4_Formula/database.md)
+- [x] **TSK-013–016: Verify & diagram**
+  - **Assignee:** Test Agent / Simulation Agent (Claude)
+  - **Details:** Verified the hello-world site reachable via `kubectl port-forward` + browser screenshot; ran `nav_sync.py` + `smoke_test.py` (11/11 pass); drew `3_Simulation/zarf_architecture.svg`.
+  - **Stage Reference:** [3_Simulation/zarf_architecture.svg](../3_Simulation/zarf_architecture.svg), [6_Semblance/smoke_test_report.md](../6_Semblance/smoke_test_report.md)
 
 ---
 
 ## ⚙️ Maintenance
 
 - [ ] Go over git commits periodically, reread changed files, and create/update Kanban tasks to stay on track
-- [ ] Update the environment folder > 1_Real_Unknown
-- [ ] Update the environment folder > 2_Environment
-- [ ] Add new features incoming as visuals folder > 3_Simulation
-- [ ] Add new ways of doing the implementation  to formula folder > 4_Formula
-- [ ] Update the Symbols and pay technical debt > 5_Symbols
-- [ ] Add new errors in semblance  > 6_Semblance
-- [ ] Update the tests folder > 7_Testing_Known
-
+- [ ] Re-verify the environment steps (`2_Environment/codespaces_zarf_setup.md`) actually inside a fresh GitHub Codespace, not just locally on macOS
+- [ ] Keep `3_Simulation/zarf_architecture.svg` in sync if the package's namespaces/components change
+- [ ] Update `4_Formula/specs.md` SPEC-014 if `zarf.yaml` changes
+- [ ] Pay down technical debt noted in the Backlog (air-gapped demo, registry publish) as time allows
