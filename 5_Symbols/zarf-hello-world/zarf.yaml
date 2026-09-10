@@ -1,0 +1,17 @@
+kind: ZarfPackageConfig
+metadata:
+  name: hello-world
+  description: Private Zarf package showcasing a hello-world website on minikube.
+  version: 0.1.0
+
+components:
+  - name: hello-world
+    required: true
+    charts: []
+    manifests:
+      - name: hello-world
+        namespace: hello-world
+        files:
+          - manifests/hello-world.yaml
+    images:
+      - nginx:1.27-alpine

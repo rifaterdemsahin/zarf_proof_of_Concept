@@ -175,6 +175,17 @@
 - **Related Files:** `5_Symbols/rules/agent_operating_rules.md`, `5_Symbols/rules/file_organization.md`, `agents.md`, `5_Symbols/toolbox/smoke_test.py`, `README.md`
 - **Last Updated:** 2026-09-10
 
+### SPEC-014: Private Zarf Hello-World Package
+- **Status:** Active
+- **Description:** A private Zarf package (`5_Symbols/zarf-hello-world/`) that packages and deploys a static hello-world website to demonstrate Zarf's packaging system inside a Codespaces minikube cluster, in support of the project OKRs (`1_Real_Unknown/okrs.md`).
+- **Key Behaviors:**
+  - `zarf.yaml` defines one required component (`hello-world`) with a manifest deploy and an `nginx:1.27-alpine` image reference
+  - `manifests/hello-world.yaml` creates a dedicated `hello-world` Namespace, a ConfigMap holding the static `index.html`, a single-replica Deployment mounting that ConfigMap, and a ClusterIP Service on port 80
+  - Built with `zarf package create .`, deployed with `zarf package deploy`, viewed via `kubectl port-forward svc/hello-world -n hello-world 8080:80`
+  - No `.devcontainer/` is shipped (ADR-002 in `4_Formula/decisions.md`) — the Codespaces + minikube + Zarf setup is a manual, documented guide in `2_Environment/codespaces_zarf_setup.md` to keep the repo root RULE-005 compliant
+- **Related Files:** `5_Symbols/zarf-hello-world/zarf.yaml`, `5_Symbols/zarf-hello-world/manifests/hello-world.yaml`, `2_Environment/codespaces_zarf_setup.md`, `4_Formula/decisions.md`
+- **Last Updated:** 2026-09-10
+
 ---
 
 ## Spec Template

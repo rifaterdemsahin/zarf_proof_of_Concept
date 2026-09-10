@@ -7,7 +7,7 @@
 ## 📋 ADR Index
 
 - **ADR 001:** Choice of Secrets Manager (Azure Key Vault)
-- **ADR 002:** [Title of the second decision]
+- **ADR 002:** No `.devcontainer/` — manual Codespaces setup script instead
 
 ---
 
@@ -37,3 +37,30 @@
 ### **Consequences**
 - **Pros:** High security, audit logging, simple credential rotation.
 - **Cons:** Requires active Azure credentials during CLI initialization and deployment pipelines.
+
+---
+
+## 📌 ADR 002: No `.devcontainer/` — manual Codespaces setup script instead
+
+### **Status:** Accepted
+**Date:** 2026-09-10
+**Decided By:** AI Agent (Real Agent, per RULE-005)
+
+### **Context & Problem Statement**
+The project objective requires running Zarf on minikube inside GitHub Codespaces. Codespaces conventionally auto-configures via a `.devcontainer/devcontainer.json` at the repo root. RULE-005 restricts root folders to `.claude/skills`, `.github/workflows`, `.kilo/skills`, and the seven stage folders — `.devcontainer/` is not on that list.
+
+### **Decision Drivers**
+1. RULE-005 must not be silently violated for convenience.
+2. The objective only needs a working Zarf + minikube environment, not a fully automated Codespace bootstrap.
+
+### **Considered Options**
+- **Option 1:** Add `.devcontainer/devcontainer.json` at the repo root (violates RULE-005).
+- **Option 2:** Document a manual setup guide run from a default Codespace, with the steps recorded in `2_Environment/codespaces_zarf_setup.md`.
+
+### **Decision Outcome**
+**Chosen Option:** **Option 2** — manual setup guide, no root `.devcontainer/`.
+- **Why:** Keeps the repo root within the allowed RULE-005 folder set; the PoC objective (see `1_Real_Unknown/okrs.md`) does not require zero-touch Codespace bootstrap.
+
+### **Consequences**
+- **Pros:** RULE-005 compliant; setup steps are explicit and versioned in `2_Environment/`.
+- **Cons:** Opening a fresh Codespace requires manually running the setup steps (or a helper script in `5_Symbols/`) instead of it happening automatically on Codespace creation.

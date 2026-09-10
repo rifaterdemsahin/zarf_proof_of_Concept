@@ -14,20 +14,20 @@
 
 | ID | Task | Agent | Coordination | Done |
 |----|------|-------|-------------|------|
-| TSK-004 | Document Codespaces devcontainer requirements (minikube, Zarf CLI, kubectl) | Environment Agent | Real Agent coordinates: Environment documents setup → Formula specs the environment | [ ] |
+| TSK-004 | Document Codespaces setup requirements (minikube, Zarf CLI, kubectl) — no root `.devcontainer/` per RULE-005 (ADR-002) | Environment Agent | Real Agent coordinates: Environment documents setup → Formula specs the environment | [x] |
 | TSK-005 | Install/verify Zarf CLI and minikube inside the Codespace | Environment Agent | [ ] |
 | TSK-006 | Start minikube cluster inside Codespaces | Environment Agent | [ ] |
 | TSK-007 | Run `zarf init` against the public Zarf init package | Environment Agent | Real Agent coordinates: Environment runs init → Test Agent smoke-tests cluster state | [ ] |
 
-## Phase 3: Private Package — Hello World Website (Pending)
+## Phase 3: Private Package — Hello World Website (In Progress)
 
 | ID | Task | Agent | Coordination | Done |
 |----|------|-------|-------------|------|
-| TSK-008 | Design the hello-world website + package layout | Simulation Agent | Real Agent coordinates: Simulation sketches the package structure → Formula specs it | [ ] |
-| TSK-009 | Write spec for the private Zarf package (SPEC in 4_Formula/specs.md) | Formula Agent | [ ] |
-| TSK-010 | Author `zarf.yaml` + hello-world manifests in 5_Symbols | Symbols Agent | Real Agent coordinates: Formula spec → Symbols implements zarf.yaml + k8s manifests | [ ] |
-| TSK-011 | Build the private package with `zarf package create` | Symbols Agent | [ ] |
-| TSK-012 | Deploy the private package with `zarf package deploy` | Symbols Agent | [ ] |
+| TSK-008 | Design the hello-world website + package layout | Simulation Agent | Real Agent coordinates: Simulation sketches the package structure → Formula specs it | [x] |
+| TSK-009 | Write spec for the private Zarf package (SPEC-014 in 4_Formula/specs.md) | Formula Agent | [x] |
+| TSK-010 | Author `zarf.yaml` + hello-world manifests in 5_Symbols | Symbols Agent | Real Agent coordinates: Formula spec → Symbols implements zarf.yaml + k8s manifests | [x] |
+| TSK-011 | Build the private package with `zarf package create` (run inside Codespaces) | Symbols Agent | [ ] |
+| TSK-012 | Deploy the private package with `zarf package deploy` (run inside Codespaces) | Symbols Agent | [ ] |
 
 ## Phase 4: Testing & Showcase (Pending)
 
